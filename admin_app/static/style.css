@@ -1,0 +1,80 @@
+
+body{
+	width: 100%;
+	height: 100%;
+}
+header{
+	background-color: grey;
+	
+}
+.main_nav {
+	display: flex;
+	justify-content: flex-end;
+
+
+}
+
+.main_nav a{
+	font-size: 15px;
+	padding: 10px 5px;
+	margin-right: 20px;
+	
+	text-decoration: none;
+	float: left;
+	color: #ffff;
+}
+.main_nav a:hover{
+	background-color: #ffff;
+	color: grey; 
+}
+.main_nav h3{
+	color: #ffffff;
+	padding: 0 20px;
+
+}
+#register .form{
+	position: absolute;
+  width: 400px;
+  height: 500px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -150px 0 0 -200px;
+  padding: 40px;
+}
+.form{
+	
+  position: absolute;
+  width: 400px;
+  height: 350px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -150px 0 0 -200px;
+  padding: 40px;
+}
+.users{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	align-items: center;
+}
+.users li{
+	list-style-type: none;
+}
+.users_logo{
+	grid-column: 1;
+	grid-row: 1 ;
+
+}
+.isadmin{
+	grid-column: 2;
+	grid-row: 1 ;
+}
+.users_list{
+	grid-column: 1;
+	grid-row: 2;
+}
+.isadmin_list{
+	grid-column: 2;
+	grid-row: 2;
+}
