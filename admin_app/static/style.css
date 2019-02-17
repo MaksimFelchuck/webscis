@@ -78,3 +78,15 @@ header{
 	grid-column: 2;
 	grid-row: 2;
 }
+.Yes {
+    color: green;
+}
+.No{
+    color: red;
+}
+.User_li a {
+    color: grey;
+}
+.User_li a:hover{
+    text-decoration: None;
+}

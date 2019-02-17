@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 
 class LoginForm(forms.Form):
@@ -11,3 +12,8 @@ class RegistrationForm(forms.Form):
     user_last_name = forms.CharField(label='user_last_name', max_length=100)
     email = forms.EmailField(label='email', max_length=40)
     password = forms.CharField(label='Password', max_length=40)
+
+
+class GetRightsForm(forms.Form):
+    is_admin = forms.BooleanField(label='isadmin')
+

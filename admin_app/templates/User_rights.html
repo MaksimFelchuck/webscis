@@ -1,0 +1,55 @@
+{% extends 'Main.html' %}
+{% load static %}
+{% block content %}
+
+
+    <section id='user'>
+		<div class="container">
+
+            {% if user.is_superuser %}
+
+			<h1><img src="{% static 'img/boy.png'%}" alt="">{{ user_login }}</h1>
+			<div class="rights ">
+
+
+				<form action="" method="post">
+                    {% csrf_token %}
+
+                        <div class="form-group form-check">
+
+                            {% if user_login.is_superuser %}
+                                <input type="checkbox" class="form-check-input" id="isadmin" name="is_admin" checked>
+
+                            {% else %}
+                                <input type="checkbox" class="form-check-input" id="eisadmin" name="is_admin">
+                            {% endif %}
+                            <label class="form-check-label" for="isadmin">Is admin</label>
+                        </div>
+
+
+
+				  	{% comment %}<h4>Project1</h4>
+
+				  	<div class="form-group form-check">
+				  		<input type="checkbox" class="form-check-input" id="exampleCheck2">
+					    <label class="form-check-label" for="exampleCheck2">Read</label>
+					</div>
+					<div class="form-group form-check">
+				  		 <input type="checkbox" class="form-check-input" id="exampleCheck3">
+					    <label class="form-check-label" for="exampleCheck3">Write</label>
+					</div>
+					<div class="form-group form-check">
+				  		<input type="checkbox" class="form-check-input" id="exampleCheck4">
+					    <label class="form-check-label" for="exampleCheck4">Exec</label>
+					</div>{% endcomment %}
+					<button type="submit" class="btn btn-success">Save</button>
+
+				</form>
+			</div>
+            {% else %}
+                <h1>You dont have rights</h1>
+            {% endif %}
+		</div>
+	</section>
+
+{% endblock %}

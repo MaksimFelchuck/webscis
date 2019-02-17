@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 from django.shortcuts import render, redirect
 from admin_app.forms import *
 
@@ -9,13 +10,30 @@ from admin_app.forms import *
 
 # @login_required
 def main(request):
-
     if not request.user.is_authenticated:
 
         return redirect('/login')
     else:
-        return render(request, 'Admin.html')
+        users = User.objects.all()
+        context = {
+            'users': users
+        }
+        return render(request, 'Admin.html', context)
 
+
+def user_right(request, user_login):
+    if not request.user.is_authenticated:
+
+        return redirect('/login')
+    else:
+        #user_per = User.objects.get(username=user_login)
+        #form = GetRightsForm(request.POST or None)
+
+        context = {
+             'user_login': user_login,
+          #  'form': form,
+        }
+        return render(request, 'User_rights.html', context)
 
 
 def login_view(request):
