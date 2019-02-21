@@ -15,5 +15,5 @@ class RegistrationForm(forms.Form):
 
 
 class GetRightsForm(forms.Form):
-    is_admin = forms.BooleanField(label='isadmin')
+    is_admin = forms.CharField(label='is_admin', max_length=4)
 

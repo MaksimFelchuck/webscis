@@ -90,3 +90,14 @@ header{
 .User_li a:hover{
     text-decoration: None;
 }
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  padding: 10px;
+}
+.grid-item {
+
+
+
+}

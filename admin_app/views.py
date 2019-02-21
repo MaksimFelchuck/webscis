@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -26,13 +28,31 @@ def user_right(request, user_login):
 
         return redirect('/login')
     else:
-        #user_per = User.objects.get(username=user_login)
-        #form = GetRightsForm(request.POST or None)
+        directory = os.getcwd()
+        directory = directory.replace('web', 'jobs')
+        os.chdir(directory)
+        files = os.listdir(directory)
 
+
+
+        form = GetRightsForm(request.POST or None)
         context = {
-             'user_login': user_login,
-          #  'form': form,
+            'user_login': user_login,
+            'form': form,
+            'files': files,
         }
+        if request.POST and form.is_valid():
+            check = form.cleaned_data['is_admin']
+            user_per = User.objects.get(username=user_login)
+            if check == 'Yes':
+                user_per.is_superuser = True
+                user_per.save()
+            else:
+
+                user_per.is_superuser = False
+                user_per.save()
+
+            return redirect('/')
         return render(request, 'User_rights.html', context)
 
 
