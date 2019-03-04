@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import *
 
 
 class LoginForm(forms.Form):
@@ -17,3 +18,7 @@ class RegistrationForm(forms.Form):
 class GetRightsForm(forms.Form):
     is_admin = forms.CharField(label='is_admin', max_length=4)
 
+class RightsForm(forms.ModelForm):
+    class Meta:
+        model = ProjectRight
+        exclude = ['']

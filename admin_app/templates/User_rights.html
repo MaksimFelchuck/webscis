@@ -29,7 +29,7 @@
 
                        </div>
                 <div class="grid-container">
-                    {% for prigect in files %}
+                    {% comment %}{% for prigect in files %}
 
                             <div class="form-group grid-item">
                                 <h4>{{ prigect }}</h4>
@@ -52,7 +52,8 @@
 
 
 
-                            {% endfor %}
+                            {% endfor %}{% endcomment %}
+                    {{ RightsForm.as_p }}
                         </div>
                     <button type="submit" class="btn btn-success">Save</button>
 

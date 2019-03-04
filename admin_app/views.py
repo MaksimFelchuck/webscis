@@ -29,19 +29,22 @@ def user_right(request, user_login):
         return redirect('/login')
     else:
         directory = os.getcwd()
-        directory = directory.replace('web', 'jobs')
+
+        directory = directory.replace('webscis', 'jobs')
         os.chdir(directory)
         files = os.listdir(directory)
 
 
 
         form = GetRightsForm(request.POST or None)
+        Rightsform = RightsForm(request.POST)
         context = {
             'user_login': user_login,
             'form': form,
             'files': files,
+            'RightsForm': Rightsform
         }
-        if request.POST and form.is_valid():
+        if request.POST and form.is_valid() and Rightsform.is_valid():
             check = form.cleaned_data['is_admin']
             user_per = User.objects.get(username=user_login)
             if check == 'Yes':
@@ -51,7 +54,7 @@ def user_right(request, user_login):
 
                 user_per.is_superuser = False
                 user_per.save()
-
+            Rightsform.save()
             return redirect('/')
         return render(request, 'User_rights.html', context)
 
