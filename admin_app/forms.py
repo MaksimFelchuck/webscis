@@ -17,6 +17,9 @@ class RegistrationForm(forms.Form):
 
 class GetRightsForm(forms.Form):
     is_admin = forms.CharField(label='is_admin', max_length=4)
+    #can_read = forms.CharField(label='can_read', max_length=4)
+    #can_write = forms.CharField(label='can_write', max_length=4)
+    #can_exec = forms.CharField(label='can_exec', max_length=4)
 
 class RightsForm(forms.ModelForm):
     class Meta:

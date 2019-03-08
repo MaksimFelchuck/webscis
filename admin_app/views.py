@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import render, redirect
 from admin_app.forms import *
+from .models import *
 
 
 # Create your views here.
@@ -33,28 +34,43 @@ def user_right(request, user_login):
         directory = directory.replace('webscis', 'jobs')
         os.chdir(directory)
         files = os.listdir(directory)
-
+        directory = directory.replace('jobs', 'webscis')
+        os.chdir(directory)
+        user_profile = User.objects.get(username=user_login)
+        rights = []
+        for project in ProjectRight.objects.all():
+            if project.user == user_profile:
+                rights.append(project)
 
 
         form = GetRightsForm(request.POST or None)
-        Rightsform = RightsForm(request.POST)
+        #rights_form = RightsForm(request.POST)
         context = {
             'user_login': user_login,
             'form': form,
             'files': files,
-            'RightsForm': Rightsform
+            #'RightsForm': rights_form,
+            'Rights': rights,
         }
-        if request.POST and form.is_valid() and Rightsform.is_valid():
-            check = form.cleaned_data['is_admin']
+        if request.POST and form.is_valid():
+            check_admin = form.cleaned_data['is_admin']
+
             user_per = User.objects.get(username=user_login)
-            if check == 'Yes':
+            if check_admin == 'Yes':
                 user_per.is_superuser = True
                 user_per.save()
             else:
-
                 user_per.is_superuser = False
                 user_per.save()
-            Rightsform.save()
+            for right in rights:
+                print(right.project)
+
+                right.can_read = request.POST.get('can_read_'+right.project)
+                right.can_write = request.POST.get('can_write_' + right.project)
+                right.can_exec = request.POST.get('can_exec_' + right.project)
+                print(right.can_read, right.can_write, right.can_exec)
+                right.save()
+
             return redirect('/')
         return render(request, 'User_rights.html', context)
 
@@ -88,6 +104,12 @@ def registration(request):
             'form': form
         }
         if request.method == 'POST' and form.is_valid():
+            directory = os.getcwd()
+            directory = directory.replace('webscis', 'jobs')
+            os.chdir(directory)
+            files = os.listdir(directory)
+            directory = directory.replace('jobs', 'webscis')
+            os.chdir(directory)
             username = form.cleaned_data['username']
             user_last_name = form.cleaned_data['user_last_name']
             email = form.cleaned_data['email']
@@ -95,6 +117,11 @@ def registration(request):
             user = User.objects.create_user(username, email, password)
             user.last_name = user_last_name
             user.save()
+            for file in files:
+                project_right = ProjectRight.objects.create(user=user, project=file)
+                project_right.save()
+
+
             return redirect('/')
         else:
             return render(request, 'registration.html', context)

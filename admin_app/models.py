@@ -6,24 +6,24 @@ class ProjectRight(models.Model):
     user = models.ForeignKey(User, on_delete= models.CASCADE, default = None)
     project = models.CharField(max_length=40)
     CHOICES = (
-        ('Choice1', 'True'),
-        ('Choice2', 'False')
+        ('Choice1', 'Yes'),
+        ('Choice2', 'No')
 
     )
     can_read = models.CharField(
         max_length=20,
-        choices=CHOICES,
-        default='False',
+
+        default='No',
     )
     can_write = models.CharField(
         max_length=20,
-        choices=CHOICES,
-        default='False',
+
+        default='No',
     )
     can_exec = models.CharField(
         max_length=20,
-        choices=CHOICES,
-        default='False',
+
+        default='No',
     )
     def __str__(self):
         return str(self.user) + '   ' +  str(self.project)

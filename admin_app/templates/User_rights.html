@@ -29,12 +29,32 @@
 
                        </div>
                 <div class="grid-container">
-                    {% comment %}{% for prigect in files %}
+                    {% for project in files %}
 
                             <div class="form-group grid-item">
-                                <h4>{{ prigect }}</h4>
+                                <h4>{{ project }}</h4>
 
-                                    <div class="form-group form-check">
+                                <label class="form-check-label" for="can_read">Can read</label>
+                                <select name="can_read_{{ project }}" id="is_admin" class="form-control mb-2">
+                                    <option value="Selected" selected disabled>Choose..</option>
+                                     <option value="Yes">Yes</option>
+                                     <option value="No">No</option>
+                                </select>
+                                <label class="form-check-label" for="can_write">Can write</label>
+                                <select name="can_write_{{ project }}" id="is_admin" class="form-control mb-2">
+                                    <option value="Selected" selected disabled>Choose..</option>
+                                     <option value="Yes">Yes</option>
+                                     <option value="No">No</option>
+                                </select>
+                                <label class="form-check-label" for="can_exec">Can exec</label>
+                                <select name="can_exec_{{ project }}" id="is_admin" class="form-control mb-2">
+                                    <option value="Selected" selected disabled>Choose..</option>
+                                     <option value="Yes">Yes</option>
+                                     <option value="No">No</option>
+                                </select>
+
+
+                                    {% comment %}<div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck2">
                                         <label class="form-check-label" for="exampleCheck2">Read</label>
                                     </div>
@@ -45,15 +65,15 @@
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck4">
                                         <label class="form-check-label" for="exampleCheck4">Exec</label>
-                                    </div>
+                                    </div>{% endcomment %}
 
 
                                </div>
 
 
 
-                            {% endfor %}{% endcomment %}
-                    {{ RightsForm.as_p }}
+                            {% endfor %}
+
                         </div>
                     <button type="submit" class="btn btn-success">Save</button>
 
